@@ -21,7 +21,9 @@ public class Main {
 
         //SIRS / Fisher /
 
-        ising(50, 50,0.1, 2500.0, 5.0, "glauber");
+        //ising(50, 50,0.1, 2500.0, 5.0);
+
+        SIRS(50, 50, 1, 0.5, 0.4, 1);
 
     }
 
@@ -30,7 +32,7 @@ public class Main {
     //arguments width
     //x,y are the dimensions of the system, temp in the temperature of the system, sw: number of increments per sweep, s: number of sweeps per print
     //lacking all data output. ie total energy, magnetisation and bootstrap method
-    static void ising(int x, int y, double temp, double sw, double s, String method){
+    static void ising(int x, int y, double temp, double sw, double s){
 
         Scanner scan = new Scanner(System.in);
 
@@ -60,14 +62,34 @@ public class Main {
             default:  Ising.simulateKawasaki(lattice, x, y, temp, sw, s, vis);
         }
 
-
-        //kawasaki
-
-
-        //
+    }
 
 
+    static void SIRS(int x, int y, double p1, double p2, double p3, int steps){
 
+        int sweep = x*y;
+        int[][] lattice = new int[x][y];
+
+        Visualization vis = new Visualization(x, y);
+        visualize(vis, lattice, x, y, 3);
+
+        SIRS.setLattice(lattice, x, y);
+        for (int k = 0; true; k++) {
+            if (k % steps == 0) {
+                visualize(vis, lattice, x, y, 3);
+            }
+
+            //select a random site in the lattice
+            Random rand = new Random();
+
+            int i = rand.nextInt(x);
+            // x is the max
+            int j = rand.nextInt(y);
+
+            SIRS.SIRS(lattice, i, j, p1, p2, p3);
+
+
+        }
 
     }
 

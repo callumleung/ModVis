@@ -80,7 +80,7 @@ public class SIRS {
 
         A site in State R goes to state S with probability p3.
      */
-    public static void SIRS(int[][] lattice,int i, int j,double p1, double p2, double p3){
+    public static void SIRS(int[][] lattice,int i, int j, double p1, double p2, double p3){
         int x = lattice.length;
         int y = lattice[0].length;
         int S = 0;
@@ -109,6 +109,9 @@ public class SIRS {
         }
 
     }
+
+
+
 
 
 }
