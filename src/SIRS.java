@@ -24,6 +24,7 @@ public class SIRS {
 
     static void setLattice(int[][] lattice, int x, int y) {
 
+
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 double nextD = new Random().nextDouble();
@@ -93,7 +94,6 @@ public class SIRS {
             //S goes to I with prob p1 if at least one neighbour is I
             if (rand <= p1) {
                 lattice[i][j] = I;
-            } else {
             }
         }
 
