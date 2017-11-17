@@ -1,10 +1,7 @@
-import java.io.*;
 import java.util.*;
 import java.awt.Color;
 
 public class Main {
-
-
 
     static void visualize(Visualization vis, int[][] grid, int W, int H, int D) {
         for (int col = 0; col < W; col++)
@@ -21,9 +18,9 @@ public class Main {
 
         //SIRS / Fisher /
 
-        //ising(50, 50,0.1, 2500.0, 5.0);
+        ising(50, 50,0.1, 2500.0, 7.0);
 
-        SIRS(50, 50, 1, 0.5, 0.4, 1);
+        //SIRS(50, 50, 1, 0.5, 0.4, 1);
 
     }
 
@@ -55,11 +52,17 @@ public class Main {
 
         //glauber
         switch(choice) {
-           // case 1:  Ising.simulateGlauber(lattice, x, y, temp, sw, s, vis);
+            default:  Ising.simGlauber(lattice, x, y, temp, s, vis);
+                break;
 
-            case 2:  Ising.simulateKawasaki(lattice, x, y, temp, sw, s, vis);
+            case 2:  Ising.simKawasaki(lattice, x, y, temp, sw, s, vis);
+                break;
 
-            default:  Ising.simulateKawasaki(lattice, x, y, temp, sw, s, vis);
+                //TODO: write data output versions for both glauber and kawasaki
+            //case 3: Ising.simulateGlauberData();
+
+            //case 4: Ising.simulateKawasakiData();
+
         }
 
     }

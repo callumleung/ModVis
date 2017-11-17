@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.stream.DoubleStream;
 
 public class Ising {
 
@@ -233,40 +234,73 @@ public class Ising {
 
 
     //methods to carry out the iterations of the system and update the display
-    static void simulateGlauber(int[][] lattice, int x, int y, double temp, double sw, double s, Visualization vis){
+    static void simGlauber(int[][] lattice, int x, int y, double temp, double stepsPerSweep, Visualization vis){
+
+        for (int i = 0; true; i++) {
+
+            glauber(lattice, x, y, temp);
+
+            //print after so many iterations
+            if (i % stepsPerSweep == 0) {
+                //Is it proper to call Main.anything() ?
+                Main.visualize(vis, lattice, x, y, 2);
+            }
+        }
+    }
+
+    static void simGlauberData(int[][] lattice, int x, int y, double temp, double sw, int numMeasurements, Visualization vis, String outFileName){
+
+
+        /* Want to keep track of:
+        *      Total magnetisation
+        *      Total magnetisation squared
+        *      Total Energy
+        *
+        *       at each chosen multiple of sweeps want to add the above values
+        *
+        *       Create arrays to hold the values of measurements of mag and energy
+        *
+        *      The arrays will be summed at the end for total mag, mag^2 and energy
+        *
+         */
+
+        double[] mags = new double[numMeasurements];
+        double[] energies = new double[numMeasurements];
 
         int j = 2;
+
 
         for (int i = 0; true; i++) {
             glauber(lattice, x, y, temp);
 
-            if (i % s == 0) {
-                Main.visualize(vis, lattice, x, y, 2);
-            }
-
-
             if (i == 100*sw) {
-
-                //data outputs
+                mags[0] = IsingOutput.magnetisation(lattice, x, y);
+                energies[0] = IsingOutput.latticeEnergy(lattice, x, y);
             }
-            if (i > 101*sw && i%(sw) == 0) {
-                j= j+1;
-                //data outputs
+            if ((i > 101*sw) && (i % sw == 0)){
 
+                mags[j-1] = IsingOutput.magnetisation(lattice, x, y);
+                energies[j-1] = IsingOutput.latticeEnergy(lattice, x, y);
+
+                ++j;
             }
 
-            if (j==1001){
+            if (j == numMeasurements){
                 break;
             }
             //we now calculate the average magnetisation
 
+            //sum the two arrays
+            double magTot = DoubleStream.of(mags).sum();
+            double energyTot = DoubleStream.of(energies).sum();
+
 
         }
 
-        //calculations and data output
+
     }
 
-    static void simulateKawasaki(int[][] lattice, int x, int y, double temp, double sw, double s, Visualization vis){
+    static void simKawasaki(int[][] lattice, int x, int y, double temp, double sw, double s, Visualization vis){
 
         int j = 2;
 

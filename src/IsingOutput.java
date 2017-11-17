@@ -1,6 +1,8 @@
 
 //a series of methods used for data output and analysis in the Ising method
 
+import java.util.stream.DoubleStream;
+
 public class IsingOutput extends Ising{
 
 
@@ -53,12 +55,10 @@ public class IsingOutput extends Ising{
     }
 
     //same value as Sus but divded by the temp.
-    //TODO remove from code
-    //no need to perform the same calculation twice
+    //TODO 1/2: remove from code
     public static double Cv(double[] mags, double temp){
         return Sus(mags, temp)/temp ;
     }
-
 
     //a method to calculate the total energy of a lattice
     //the energy at each lattice site is calculated and then summed
@@ -108,6 +108,7 @@ public class IsingOutput extends Ising{
 
 
     }
+
 
 
 
