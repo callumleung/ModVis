@@ -1,7 +1,5 @@
-
-//a series of methods used for data output and analysis in the Ising method
-
-import java.util.stream.DoubleStream;
+package com.ckl;
+//a series of methods used for data output and analysis in the com.ckl.Ising method
 
 public class IsingOutput extends Ising{
 
@@ -55,7 +53,7 @@ public class IsingOutput extends Ising{
     }
 
     //same value as Sus but divded by the temp.
-    //TODO 1/2: remove from code
+    //TODO is this necessary
     public static double Cv(double[] mags, double temp){
         return Sus(mags, temp)/temp ;
     }
@@ -70,7 +68,7 @@ public class IsingOutput extends Ising{
         for (int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
                 double energyij = energy(lattice, i, j, x,y);
-                totalE = totalE +energyij;
+                totalE = totalE + energyij;
             }
         }
         //to avoid over counting the energy we divide by two

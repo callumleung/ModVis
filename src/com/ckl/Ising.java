@@ -1,3 +1,5 @@
+package com.ckl;
+
 import java.util.Random;
 import java.util.stream.DoubleStream;
 
@@ -106,9 +108,7 @@ public class Ising {
         }
     }
 
-
     //an alternative method to the Glauber method
-
     //kawasaki method
     static void kawasaki(int[][] lattice,int x, int y, double temp){
         //we first need to randomly choose our two distinct sites
@@ -242,12 +242,13 @@ public class Ising {
 
             //print after so many iterations
             if (i % stepsPerSweep == 0) {
-                //Is it proper to call Main.anything() ?
-                Main.visualize(vis, lattice, x, y, 2);
+                //Is it proper to call com.ckl.Main.anything() ?
+                Visualization.draw(vis, lattice, x, y, 2);
             }
         }
     }
 
+    //a method that runs the simulation and
     static void simGlauberData(int[][] lattice, int x, int y, double temp, double sw, int numMeasurements, Visualization vis, String outFileName){
 
 
@@ -261,6 +262,8 @@ public class Ising {
         *       Create arrays to hold the values of measurements of mag and energy
         *
         *      The arrays will be summed at the end for total mag, mag^2 and energy
+        *
+        *      Want to write to average magnetism against temp; average energy against temp; Cv against temp;
         *
          */
 
@@ -277,6 +280,7 @@ public class Ising {
                 mags[0] = IsingOutput.magnetisation(lattice, x, y);
                 energies[0] = IsingOutput.latticeEnergy(lattice, x, y);
             }
+
             if ((i > 101*sw) && (i % sw == 0)){
 
                 mags[j-1] = IsingOutput.magnetisation(lattice, x, y);
@@ -288,14 +292,27 @@ public class Ising {
             if (j == numMeasurements){
                 break;
             }
-            //we now calculate the average magnetisation
+            //Now calculate the average magnetisation
 
-            //sum the two arrays
+            //Sum the two arrays
             double magTot = DoubleStream.of(mags).sum();
             double energyTot = DoubleStream.of(energies).sum();
 
+            //Calculate Cv
+            double Cv = IsingOutput.Cv(mags, temp);
+            double avMag = magTot / numMeasurements;
+
+
+
+
+
 
         }
+
+
+
+
+
 
 
     }
@@ -308,7 +325,7 @@ public class Ising {
             kawasaki(lattice, x, y, temp);
 
             if (i % s == 0) {
-                Main.visualize(vis, lattice, x, y, 2);
+                Visualization.draw(vis, lattice, x, y, 2);
             }
 
 

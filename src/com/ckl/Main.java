@@ -1,26 +1,18 @@
+package com.ckl;
+
 import java.util.*;
-import java.awt.Color;
 
 public class Main {
-
-    static void visualize(Visualization vis, int[][] grid, int W, int H, int D) {
-        for (int col = 0; col < W; col++)
-            for (int row = 0; row < H; row++)
-                vis.set(col, row, grid[col][row] == 0 ? Color.BLACK : Color.getHSBColor(0.666666666666667f * (1f - Math.min(grid[col][row], D) / (float) D), 1f, 1f));
-
-        vis.draw();
-    }
-
 
     public static void main(String[] args) {
 
         //select method
 
-        //SIRS / Fisher /
+        //com.ckl.SIRS / Fisher /
 
         ising(50, 50,0.1, 2500.0, 7.0);
 
-        //SIRS(50, 50, 1, 0.5, 0.4, 1);
+        //com.ckl.SIRS(50, 50, 1, 0.5, 0.4, 1);
 
     }
 
@@ -48,6 +40,9 @@ public class Main {
         }
 
         System.out.println("Enter 1 to use Glauber and 2 to use Kawasaki");
+
+        //TODO change to enums
+
         int choice = Integer.valueOf(scan.nextLine());
 
         //glauber
@@ -59,9 +54,9 @@ public class Main {
                 break;
 
                 //TODO: write data output versions for both glauber and kawasaki
-            //case 3: Ising.simulateGlauberData();
+            //case 3: com.ckl.Ising.simulateGlauberData();
 
-            //case 4: Ising.simulateKawasakiData();
+            //case 4: com.ckl.Ising.simulateKawasakiData();
 
         }
 
@@ -74,12 +69,12 @@ public class Main {
         int[][] lattice = new int[x][y];
 
         Visualization vis = new Visualization(x, y);
-        visualize(vis, lattice, x, y, 3);
+        Visualization.draw(vis, lattice, x, y, 3);
 
         SIRS.setLattice(lattice, x, y);
         for (int k = 0; true; k++) {
             if (k % steps == 0) {
-                visualize(vis, lattice, x, y, 3);
+                Visualization.draw(vis, lattice, x, y, 3);
             }
 
             //select a random site in the lattice
