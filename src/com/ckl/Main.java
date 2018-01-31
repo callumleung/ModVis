@@ -1,3 +1,5 @@
+package com.ckl;
+
 import java.io.*;
 import java.util.*;
 import java.awt.Color;
@@ -57,9 +59,9 @@ public class Main {
         switch(choice) {
            // case 1:  Ising.simulateGlauber(lattice, x, y, temp, sw, s, vis);
 
-            case 2:  Ising.simulateKawasaki(lattice, x, y, temp, sw, s, vis);
+            case 2:  Ising.simKawasaki(lattice, x, y, temp, sw, s, vis);
 
-            default:  Ising.simulateKawasaki(lattice, x, y, temp, sw, s, vis);
+            default:  Ising.simGlauber(lattice, x, y, temp, s, vis);
         }
 
     }

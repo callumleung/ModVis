@@ -242,7 +242,6 @@ public class Ising {
 
             //print after so many iterations
             if (i % stepsPerSweep == 0) {
-                //Is it proper to call com.ckl.Main.anything() ?
                 Visualization.draw(vis, lattice, x, y, 2);
             }
         }
