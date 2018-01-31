@@ -1,5 +1,5 @@
-
-//a series of methods used for data output and analysis in the Ising method
+package com.ckl;
+//a series of methods used for data output and analysis in the com.ckl.Ising method
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -58,12 +58,10 @@ public class IsingOutput extends Ising{
     }
 
     //same value as Sus but divded by the temp.
-    //TODO remove from code
-    //no need to perform the same calculation twice
+    //TODO is this necessary
     public static double Cv(double[] mags, double temp){
         return Sus(mags, temp)/temp ;
     }
-
 
     //a method to calculate the total energy of a lattice
     //the energy at each lattice site is calculated and then summed
@@ -75,7 +73,7 @@ public class IsingOutput extends Ising{
         for (int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
                 double energyij = energy(lattice, i, j, x,y);
-                totalE = totalE +energyij;
+                totalE = totalE + energyij;
             }
         }
         //to avoid over counting the energy we divide by two
@@ -154,6 +152,7 @@ public class IsingOutput extends Ising{
 
         //calculations and data output
     }
+
 
 
 

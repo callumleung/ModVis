@@ -1,10 +1,12 @@
+package com.ckl;
+
 import java.util.Random;
 
 public class SIRS {
 
 
     //again data out put and analysis are omitted for now
-    /*SIRS model of epidemics spreading
+    /*com.ckl.SIRS model of epidemics spreading
     S: An individual that is susceptible to infection
     I: An infected individual
     R: Recovered from infection
