@@ -1,7 +1,12 @@
 
 //a series of methods used for data output and analysis in the Ising method
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class IsingOutput extends Ising{
+
 
 
     //a method to calculate the total magnetisation of a lattice
@@ -109,6 +114,46 @@ public class IsingOutput extends Ising{
 
     }
 
+
+    static void simulateGlauber(int[][] lattice, int x, int y, double temp, double sw, double s, Visualization vis, boolean visTrue) throws IOException{
+
+        BufferedWriter totEnergyOut = new BufferedWriter(new FileWriter("Total_Energy.dat"));
+
+        int j = 2;
+
+        for (int i = 0; true; i++) {
+            glauber(lattice, x, y, temp);
+
+            if (i % s == 0) {
+                if (visTrue){
+                Main.visualize(vis, lattice, x, y, 2);
+                }
+            }
+
+
+            if (i == 100*sw) {
+
+               totEnergyOut.write(String.valueOf(latticeEnergy(lattice, x, y)) + "\n");
+                //data outputs
+            }
+            if (i > 101*sw && i%(sw) == 0) {
+                j= j+1;
+                totEnergyOut.write(String.valueOf(latticeEnergy(lattice, x, y)) + "\n");
+                //data outputs
+
+            }
+
+            if (j==1001){
+                totEnergyOut.write(String.valueOf(latticeEnergy(lattice, x, y)) + "\n");
+                totEnergyOut.close();
+                System.exit(0);
+            }
+            //we now calculate the average magnetisation
+
+        }
+
+        //calculations and data output
+    }
 
 
 

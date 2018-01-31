@@ -15,15 +15,15 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
 
         //select method
 
         //SIRS / Fisher /
 
-        //ising(50, 50,0.1, 2500.0, 5.0);
+        ising(50, 50,0.1, 2500.0, 100.0);
 
-        SIRS(50, 50, 1, 0.5, 0.4, 1);
+        //SIRS(50, 50, 1, 0.5, 0.4, 1);
 
     }
 
@@ -32,7 +32,7 @@ public class Main {
     //arguments width
     //x,y are the dimensions of the system, temp in the temperature of the system, sw: number of increments per sweep, s: number of sweeps per print
     //lacking all data output. ie total energy, magnetisation and bootstrap method
-    static void ising(int x, int y, double temp, double sw, double s){
+    static void ising(int x, int y, double temp, double sw, double s) throws IOException{
 
         Scanner scan = new Scanner(System.in);
 
@@ -59,7 +59,9 @@ public class Main {
 
             case 2:  Ising.simulateKawasaki(lattice, x, y, temp, sw, s, vis);
 
-            default:  Ising.simulateKawasaki(lattice, x, y, temp, sw, s, vis);
+            case 3: IsingOutput.simulateGlauber(lattice, x, y, temp, sw, s, vis, true);
+
+            default:  Ising.simulateGlauber(lattice, x, y, temp, sw, s, vis);
         }
 
     }
